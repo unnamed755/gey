@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter with User-Selected Color</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            margin-right: 10px;
+        }
+
+        .input-container button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: gray;
+            color: white;
+            cursor: pointer;
+        }
+
+        .counter-container {
+            background-color: #333;
+            padding: 20px 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .counter-container button {
+            background-color: gray;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .count-display {
+            font-size: 24px;
+            min-width: 50px;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input type="text" class="input-number" placeholder="Enter a number">
+        <input type="color" class="color-picker">
+        <button class="set-counter">jo'natish</button>
+    </div>
+    
+    <div class="counter-container">
+        <button class="minus">-</button>
+        <div class="count-display">0</div>
+        <button class="plus">+</button>
+    </div>
+
+    <script>
+        // Select necessary elements
+        const inputField = document.querySelector('.input-number');
+        const colorPicker = document.querySelector('.color-picker');
+        const setButton = document.querySelector('.set-counter');
+        const countDisplay = document.querySelector('.count-display');
+        const minusButton = document.querySelector('.minus');
+        const plusButton = document.querySelector('.plus');
+
+        let count = 0; // Default counter value
+
+        // Function to update the counter background color
+        const updateBackgroundColor = () => {
+            countDisplay.style.backgroundColor = colorPicker.value;
+        };
+
+        // Set initial counter value and update color
+        setButton.addEventListener('click', () => {
+            const inputValue = inputField.value.trim(); // Get input value
+            if (!isNaN(inputValue) && inputValue !== "") {
+                count = parseInt(inputValue);
+                countDisplay.textContent = count;
+                updateBackgroundColor(); // Update background color
+                inputField.value = ""; // Clear input field
+            } else {
+                alert("Please enter a valid number!");
+            }
+        });
+
+        // Increment the counter and keep background color
+        plusButton.addEventListener('click', () => {
+            count++;
+            countDisplay.textContent = count;
+            updateBackgroundColor(); // Keep the selected color
+        });
+
+        // Decrement the counter and keep background color
+        minusButton.addEventListener('click', () => {
+            count--;
+            countDisplay.textContent = count;
+            updateBackgroundColor(); // Keep the selected color
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
